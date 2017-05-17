@@ -4,13 +4,10 @@ import com.project.lango.domain.Answer;
 import com.project.lango.domain.Question;
 import com.project.lango.repository.AnswerRepository;
 import com.project.lango.repository.QuestionRepository;
-import org.hibernate.sql.ANSICaseFragment;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import sun.dc.pr.PRError;
 
-import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -30,12 +27,15 @@ public class AnswerService {
     public Answer addAnswerToQuestion(Long questionId, Answer answer){
 
         Question question = questionRepository.findOne(questionId);
+        Answer answer1 = setProperties(question, answer);
+        Answer savedAnswer = answerRepository.save(answer1);
 
-        List<Answer> answers = new ArrayList<>();
-        answers.add(answer);
-        question.setAnswers(answers);
-        answerRepository.save(answer);
+        question.getAnswers().add(savedAnswer);
+        return answer;
+    }
 
+    private Answer setProperties(Question question, Answer answer){
+        answer.setQuestion(question);
         return answer;
     }
 

@@ -3,7 +3,7 @@ package com.project.lango.ws.rest;
 import com.project.lango.domain.User;
 import com.project.lango.repository.UserRepository;
 import com.project.lango.service.UserService;
-import com.project.lango.ws.rest.CreateUser.CreateUser;
+import com.project.lango.ws.rest.Create.CreateUser;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.ObjectError;
@@ -77,4 +77,6 @@ public class UserController {
         }
 
         }
-    }
+
+
+}

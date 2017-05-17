@@ -1,25 +1,47 @@
 package com.project.lango.ws.rest;
 
+import com.project.lango.domain.Answer;
 import com.project.lango.domain.Question;
-import org.springframework.http.ResponseEntity;
-import org.springframework.security.access.prepost.PreAuthorize;
-import org.springframework.web.bind.annotation.RequestBody;
+import com.project.lango.repository.QuestionRepository;
+import com.project.lango.service.AnswerService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
-import javax.validation.Valid;
+import java.util.List;
 
 /**
- * Created by ioana on 8/05/2017.
+ * Created by alexandra on 5/10/2017.
  */
 @RestController
 @RequestMapping(value = "/questions")
 public class QuestionController {
 
-    @RequestMapping(value = "/add", method = RequestMethod.POST)
-    @PreAuthorize(value = "hasRole('ADMIN')")
-    public ResponseEntity<?> addQuestion(@RequestBody @Valid Question question){
+    @Autowired
+    private QuestionRepository questionRepository;
 
+    @Autowired
+    private AnswerService answerService;
+
+
+    @RequestMapping(value = "/{category}", method = RequestMethod.GET)
+    public List<Question> getByCategory(@PathVariable String category){
+
+        Question.Category questionCategory;
+
+            questionCategory = Question.Category.valueOf(category.toUpperCase());
+            return questionRepository.getAllByCategory(questionCategory);
     }
+
+
+    @RequestMapping(value = "/getAforQ/{questionId}", method = RequestMethod.GET)
+    public List<Answer> getAnswersForQuestion(@PathVariable Long questionId){
+        return answerService.getAllAnswersForQuestion(questionId);
+    }
+
+
+
+
 }

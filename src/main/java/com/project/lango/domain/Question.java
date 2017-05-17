@@ -1,8 +1,10 @@
 package com.project.lango.domain;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.springframework.data.jpa.domain.AbstractPersistable;
 
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -16,11 +18,14 @@ public class Question extends AbstractPersistable<Long> {
     @Lob
     private String text;
 
-    @OneToMany
+    @OneToMany(cascade = CascadeType.REMOVE, orphanRemoval = true)
     private List<Answer> answers;
 
     private Category category;
 
+    @ManyToOne
+    @JsonIgnore
+    private Quiz quiz;
 
     public String getText() {
         return text;
@@ -46,7 +51,23 @@ public class Question extends AbstractPersistable<Long> {
         this.category = category;
     }
 
-    private enum Category {
+    public Quiz getQuiz() {
+        return quiz;
+    }
+
+    public void setQuiz(Quiz quiz) {
+        this.quiz = quiz;
+    }
+
+    public enum Category {
         GERMAN, SPANISH, DUTCH;
+
+        public static List<String> getAllCategories(){
+            List<String> categories = new ArrayList<>();
+            categories.add(GERMAN.name());
+            categories.add(SPANISH.name());
+            categories.add(DUTCH.name());
+            return categories;
+        }
     }
 }

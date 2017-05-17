@@ -1,10 +1,11 @@
 package com.project.lango.domain;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.springframework.data.jpa.domain.AbstractPersistable;
 
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToOne;
 
 /**
  * Created by ioana on 8/05/2017.
@@ -16,7 +17,8 @@ public class Answer extends AbstractPersistable<Long>{
 
     private boolean correct;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JsonIgnore
     private Question question;
 
     public Question getQuestion() {
