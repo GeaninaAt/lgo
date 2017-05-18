@@ -15,6 +15,7 @@ import java.util.List;
  */
 @RestController
 @RequestMapping(value = "/quiz")
+@CrossOrigin(origins = "http://localhost:8000")
 public class QuizController {
 
     @Autowired

@@ -7,10 +7,7 @@ import com.project.lango.ws.rest.Create.CreateUser;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.ObjectError;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.PostConstruct;
 import javax.validation.Valid;
@@ -23,7 +20,7 @@ import java.util.List;
  */
 @RestController
 @RequestMapping(value = "/users")
-
+@CrossOrigin(origins = "http://localhost:8000")
 public class UserController {
 
     @Autowired
@@ -52,7 +49,7 @@ public class UserController {
             System.out.println("Default admin added");
         }
     }
-
+    @CrossOrigin(origins = "http://localhost:8000")
     @RequestMapping(value = "/createAccount", method = RequestMethod.POST)
     public ResponseEntity<?> createAccount(@RequestBody @Valid CreateUser createUser){
         User user = new User();

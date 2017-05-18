@@ -5,10 +5,7 @@ import com.project.lango.domain.Question;
 import com.project.lango.repository.QuestionRepository;
 import com.project.lango.service.AnswerService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -17,6 +14,7 @@ import java.util.List;
  */
 @RestController
 @RequestMapping(value = "/questions")
+@CrossOrigin(origins = "http://localhost:8000")
 public class QuestionController {
 
     @Autowired

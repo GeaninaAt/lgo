@@ -12,14 +12,13 @@ import org.springframework.web.bind.annotation.*;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.security.Principal;
-import java.util.HashMap;
-import java.util.Map;
 
 /**
  * Created by ioana on 8/05/2017.
  */
 @RestController
 @RequestMapping(value = "/home")
+@CrossOrigin(origins = "http://localhost:8000")
 public class HomeController {
 
     @Autowired
