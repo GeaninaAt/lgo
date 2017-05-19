@@ -2,6 +2,8 @@ package com.project.lango.repository;
 
 import com.project.lango.domain.Quiz;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
 /**
@@ -9,4 +11,6 @@ import org.springframework.stereotype.Repository;
  */
 @Repository
 public interface QuizRepository extends JpaRepository<Quiz, Long>{
+    @Query(name = "findByType", value = "select q from Quiz as q where q.type = :type")
+    Quiz getByType(@Param("type") Quiz.Type type);
 }

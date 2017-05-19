@@ -27,7 +27,7 @@ import java.util.stream.Collectors;
  */
 @RestController
 @RequestMapping(value = "/admin")
-@CrossOrigin(origins = "http://localhost:3000")
+@CrossOrigin(origins = "http://localhost:8000")
 public class AdminController {
 
     @Autowired
@@ -55,6 +55,7 @@ public class AdminController {
     }
 
     @PreAuthorize("hasRole('ADMIN')")
+    @CrossOrigin(origins = "http://localhost:8000")
     @RequestMapping(value = "/addQuestion/{quizId}", method = RequestMethod.POST)
     public ResponseEntity<?> addQuestion(@RequestBody @Valid Question question, @PathVariable Long quizId){
         Quiz quiz = quizRepository.findOne(quizId);

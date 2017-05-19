@@ -4,7 +4,6 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.springframework.data.jpa.domain.AbstractPersistable;
 
 import javax.persistence.*;
-import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -62,12 +61,5 @@ public class Question extends AbstractPersistable<Long> {
     public enum Category {
         GERMAN, SPANISH, DUTCH;
 
-        public static List<String> getAllCategories(){
-            List<String> categories = new ArrayList<>();
-            categories.add(GERMAN.name());
-            categories.add(SPANISH.name());
-            categories.add(DUTCH.name());
-            return categories;
-        }
     }
 }

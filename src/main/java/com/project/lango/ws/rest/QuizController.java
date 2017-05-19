@@ -76,4 +76,13 @@ public class QuizController {
     public List<Quiz> getAllQuizzes(){
         return quizRepository.findAll();
     }
+
+    @RequestMapping(value = "/{type}", method = RequestMethod.GET)
+    public Quiz getByType(@PathVariable String type){
+
+        Quiz.Type quizType;
+
+        quizType = Quiz.Type.valueOf(type.toUpperCase());
+        return quizRepository.getByType(quizType);
+    }
 }

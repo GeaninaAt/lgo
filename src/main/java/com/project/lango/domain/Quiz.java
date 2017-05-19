@@ -5,7 +5,6 @@ import org.springframework.data.jpa.domain.AbstractPersistable;
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.OneToMany;
-import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -50,13 +49,6 @@ public class Quiz extends AbstractPersistable<Long> {
     public enum Type{
         GERMAN, SPANISH, DUTCH;
 
-        public static List<String> getAllTypes(){
-            List<String> types = new ArrayList<>();
-            types.add(GERMAN.name());
-            types.add(SPANISH.name());
-            types.add(DUTCH.name());
-            return types;
-        }
     }
 
 
