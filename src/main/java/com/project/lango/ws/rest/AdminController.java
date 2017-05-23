@@ -49,6 +49,7 @@ public class AdminController {
     private QuizRepository quizRepository;
 
     @PreAuthorize("hasRole('ADMIN')")
+    @CrossOrigin(origins = "http://localhost:8000")
     @RequestMapping(value = "/getUsers", method = RequestMethod.GET)
     public List<User> getAllUsers(){
         return userRepository.findAll();
@@ -69,6 +70,7 @@ public class AdminController {
     }
 
     @PreAuthorize("hasRole('ADMIN')")
+    @CrossOrigin(origins = "http://localhost:8000")
     @RequestMapping(value = "/addAnswers", method = RequestMethod.POST)
         public ResponseEntity<?> addAnswers(@RequestBody @Valid CreateAnswer createAnswer){
         if(!questionRepository.exists(createAnswer.getQuestionId())) {
@@ -107,6 +109,7 @@ public class AdminController {
     }
 
     @PreAuthorize("hasRole('ADMIN')")
+    @CrossOrigin(origins = "http://localhost:8000")
     @RequestMapping(value = "/deleteQuestion/{questionId}", method = RequestMethod.DELETE)
     public ResponseEntity<?> deleteQuestion(@PathVariable Long questionId){
             if(!questionRepository.exists(questionId)){
@@ -118,15 +121,29 @@ public class AdminController {
     }
 
     @RequestMapping(value = "/allQuestions", method = RequestMethod.GET)
+    @CrossOrigin(origins = "http://localhost:8000")
     public List<Question> getAllQuestions(){
         return questionService.getAllQuestions();
     }
 
     @RequestMapping(value = "/getQuestion/{questionId}", method = RequestMethod.GET)
+    @CrossOrigin(origins = "http://localhost:8000")
     public Question getQuestion(@PathVariable Long questionId){
         return questionRepository.getOne(questionId);
     }
 
+    @RequestMapping(value = "/deleteAnswer/{answerId}", method = RequestMethod.DELETE)
+    @CrossOrigin(origins = "http://localhost:8000")
+    public ResponseEntity<?> deleteAnswer(@PathVariable Long answerId){
+        Answer answer = answerRepository.findOne(answerId);
+        Question question = answer.getQuestion();
+        try{
+            answerService.deleteAnswer(answerId);
+            return ResponseEntity.noContent().build();
+        }catch(UnsupportedOperationException e){
+            return ResponseEntity.badRequest().body(new ObjectError("answer.id", "Unsupported operation."));
+        }
+    }
 
 }
 

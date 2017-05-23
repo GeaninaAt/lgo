@@ -25,6 +25,7 @@ public class QuestionController {
 
 
     @RequestMapping(value = "/{category}", method = RequestMethod.GET)
+    @CrossOrigin(origins = "http://localhost:8000")
     public List<Question> getByCategory(@PathVariable String category){
 
         Question.Category questionCategory;
@@ -35,6 +36,7 @@ public class QuestionController {
 
 
     @RequestMapping(value = "/getAforQ/{questionId}", method = RequestMethod.GET)
+    @CrossOrigin(origins = "http://localhost:8000")
     public List<Answer> getAnswersForQuestion(@PathVariable Long questionId){
         return answerService.getAllAnswersForQuestion(questionId);
     }

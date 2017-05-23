@@ -26,6 +26,7 @@ public class HomeController {
 
 
     @RequestMapping("/user")
+    @CrossOrigin(origins = "http://localhost:8000")
     public User user(Principal principal) {
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         String loggedUsername = auth.getName();
@@ -34,13 +35,14 @@ public class HomeController {
 
 
     @RequestMapping(value = "/authenticate", method = RequestMethod.POST)
+    @CrossOrigin(origins = "http://localhost:8000")
     public ResponseEntity<?> login(@RequestParam String username, @RequestParam String password,
-                                                     HttpServletResponse response) throws IOException {
+                        HttpServletResponse response) throws IOException {
 
         User user = userRepository.findByUsername(username);
 
         if (user != null && user.getPassword().equals(password)) {
-            return new ResponseEntity<>(HttpStatus.OK);
+            return ResponseEntity.ok().body(user);
         } else {
             return new ResponseEntity<>(HttpStatus.UNAUTHORIZED);
         }

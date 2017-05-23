@@ -50,15 +50,13 @@ public class AnswerService {
         }
     }
 
-    public void deleteAnswer(Long answerId, Long questionId){
+    public void deleteAnswer(Long answerId){
         Answer answer = answerRepository.findOne(answerId);
-        Question question = questionRepository.findOne(questionId);
+        Question question = answer.getQuestion();
 
-        if(answer.getQuestion() == question){
-            answerRepository.delete(answer);
-        }else{
-            System.out.println("No answer found for this question");
-        }
+        question.getAnswers().remove(answer);
+        answer.setQuestion(null);
+        answerRepository.delete(answer);
     }
 
     public Answer getCorrectAnswer(Long answerId, Long questionId){

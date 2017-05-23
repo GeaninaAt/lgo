@@ -1,4 +1,5 @@
 com\project\lango\repository\AnswerRepository.class
+com\project\lango\domain\Comment.class
 com\project\lango\domain\Question.class
 com\project\lango\Main.class
 com\project\lango\ws\rest\QuestionController.class
@@ -9,6 +10,7 @@ com\project\lango\ws\rest\Create\CreateAnswer.class
 com\project\lango\service\UserService.class
 com\project\lango\service\AnswerService.class
 com\project\lango\service\QuestionService.class
+com\project\lango\ws\rest\Create\CreateComment.class
 com\project\lango\domain\Quiz.class
 com\project\lango\config\WebSecurityConfig.class
 com\project\lango\config\WebMvcConfig.class
@@ -19,6 +21,8 @@ com\project\lango\ws\rest\UserController.class
 com\project\lango\domain\User.class
 com\project\lango\ws\rest\Create\CreateUser.class
 com\project\lango\domain\Question$Category.class
+com\project\lango\repository\CommentRepository.class
+com\project\lango\service\CommentService.class
 com\project\lango\ws\rest\QuizController.class
 com\project\lango\domain\Quiz$Type.class
 com\project\lango\repository\QuestionRepository.class

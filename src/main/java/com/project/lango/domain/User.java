@@ -6,15 +6,11 @@ import org.springframework.data.jpa.domain.AbstractPersistable;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
-import org.hibernate.validator.constraints.Email;
-import org.springframework.data.jpa.domain.AbstractPersistable;
-
-import javax.persistence.Entity;
-import java.util.Date;
 
 import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
+import javax.persistence.OneToMany;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Date;
@@ -43,6 +39,10 @@ public class User extends AbstractPersistable<Long> implements UserDetails {
     private int phone;
     private Date birthdate;
 
+    @OneToMany
+    @JsonIgnore
+    private List<Comment> comments;
+
     public String getFname() {
         return fname;
     }
@@ -61,6 +61,14 @@ public class User extends AbstractPersistable<Long> implements UserDetails {
 
     public String getUsername() {
         return username;
+    }
+
+    public List<Comment> getComments() {
+        return comments;
+    }
+
+    public void setComments(List<Comment> comments) {
+        this.comments = comments;
     }
 
     @JsonIgnore

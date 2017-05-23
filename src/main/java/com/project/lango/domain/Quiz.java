@@ -17,10 +17,13 @@ public class Quiz extends AbstractPersistable<Long> {
 
     public Type type;
 
-    private int score = 10;
+    private int score = 20;
 
     @OneToMany(cascade = CascadeType.REMOVE, orphanRemoval = true)
     private List<Question> questions;
+
+    @OneToMany
+    private List<Comment> comments;
 
     public List<Question> getQuestions() {
         return questions;
@@ -44,6 +47,14 @@ public class Quiz extends AbstractPersistable<Long> {
 
     public void setScore(int score) {
         this.score = score;
+    }
+
+    public List<Comment> getComments() {
+        return comments;
+    }
+
+    public void setComments(List<Comment> comments) {
+        this.comments = comments;
     }
 
     public enum Type{
